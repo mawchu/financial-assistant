@@ -1,42 +1,25 @@
-# Nuxt 3 Minimal Starter
+# Financial Assistant
+財不會忘記你 - 財務記帳小幫手
+A Financial Assistant app for people not sure where money flowed, the development still on the way.
+The features of the site incloudes:
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Category label
+Make sure each spending could be categorized.
 
-## Setup
+## Visialized Charts
+Shows the financial condition each day
 
-Make sure to install the dependencies:
+... other features wait on line
 
-```bash
-# yarn
-yarn install
+# UI & UX design figma file
+https://www.figma.com/file/kTsYdlamMTXXzZsPUwcNjo/Financial-Helper-%E8%A8%98%E5%B8%B3%E5%B9%AB%E6%89%8B?type=design&node-id=0%3A1&mode=design&t=ebfAqQZE1SG7BhUk-1
 
-# npm
-npm install
+# Framework structure
+Vite X Vue3 X Nuxt3 X Pinia X Vue-echarts
 
-# pnpm
-pnpm install
-```
+# deploy on firebase web
+go here 
+https://financial-asistant.web.app/
 
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Design and Frontend develop by
+Mawchu Xie
