@@ -16,11 +16,11 @@ Shows the financial condition each day
 https://www.figma.com/file/kTsYdlamMTXXzZsPUwcNjo/Financial-Helper-%E8%A8%98%E5%B8%B3%E5%B9%AB%E6%89%8B?type=design&node-id=0%3A1&mode=design&t=ebfAqQZE1SG7BhUk-1
 
 ## Project structure
-Package tool: Vite
-Javascript framework: Vue3
-SSR framework: Nuxt3
-Data: Pinia
-Charts: Vue-echarts
+- Package tool: Vite 
+- Javascript framework: Vue3
+- SSR framework: Nuxt3
+- Data: Pinia
+- Charts: Vue-echarts
 
 ## deploy on firebase web
 go here 
