@@ -2,7 +2,7 @@
     <nav ref="tabs" class="header-fix overflow-visible"
         :class="[
             scrollType === 'down' || isTriggeredWave  ? 'wave' : '',
-            itemShow ? 'h-[100vh]' : 'h-[70px]'
+            itemShow ? 'h-[100%]' : 'h-[70px]'
         ]">
         <div class="w-full h-[100%] md:w-4/5 lg:w-2/3 flex flex-col">
             <ol class="flex flex-col md:flex-row md:justify-between text-lg font-semibold text-secondary">
@@ -20,7 +20,7 @@
                     </figure>
                 </li>
                 <li v-for="({ title, icon }, index) in menu" :key="index"
-                    class="menu-item md:flex flex-col relative w-full h-[70px] items-center item linear duration-300 group overflow-hidden mt-6 md:mt-0"
+                    class="menu-item md:flex flex-col relative w-full h-[60px] items-center item linear duration-300 group overflow-hidden mt-6 md:mt-0"
                     :class="[
                         (triggeredByObsered(index) && scrollType === 'down') ||
                         (triggeredByObsered(index) && isTriggeredWave) ? 'active' : '',
@@ -117,7 +117,6 @@ $max-width-xs: 400px;
 
 .header-fix {
     --nav-height-md: 70px;
-    // --nav-height-sm: 100vh;
     @apply flex justify-between fixed top-0 left-0 md:h-[var(--nav-height-md)] w-full ease-in-out duration-300 pt-3 md:pt-0 px-3 lg:px-10 md:bg-[unset];
     z-index: 14;
     li, div {
@@ -205,7 +204,6 @@ $max-width-xs: 400px;
         inset: -5px;
         pointer-events: none;
         transform: scale(0);
-
         background-repeat: repeat-x;
         transform: translateY(-100px);
         background-position: bottom left;
@@ -223,7 +221,7 @@ $max-width-xs: 400px;
         &::after, &::before {
             transform: translateY(0);
             @media all and (max-width: #{$max-width-md}) {
-                transform: translateY(-100px);
+                transform: translateY(-200px);
             }
         }
         

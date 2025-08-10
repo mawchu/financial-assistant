@@ -4,7 +4,7 @@
             <article class="text-xl md:text-2xl  lg:h-[100%] flex flex-col">
                 <div class="mb-4 md:mb-5 xl:mb-6">
                     <font-awesome-icon :icon="['fa-regular', 'fa-calendar-days']" />
-                    <span class="mx-2 md:mx-4 text-center font-extrabold transition-all duration-300">
+                    <span class="mx-2 md:mx-3 text-center font-extrabold transition-all duration-300">
                         Sums Up Spending
                     </span>
                 </div>
@@ -13,7 +13,8 @@
                         <div class="w-full flex justify-between">
                             <p class="text-sm sm:text-base  font-semibold text-[#9a9a9a] leading-[16px] sm:leading-[14px] lg:leading-[18px]">
                                 Total Amount<br>
-                                <span v-if="overviewMergedRecords.length" class="text-xs">{{ overviewMergedRecords[0].date }} - {{ overviewMergedRecords[overviewMergedRecords.length-1].date.substring(5)  }}</span>
+                                <span v-if="overviewMergedRecords.length" class="text-xs">
+                                    {{ overviewMergedRecords[overviewMergedRecords.length-1].date }} - {{ overviewMergedRecords[0].date.substring(5) }}</span>
                             </p>
                                 
                             <font-awesome-icon class="text-secondary text-3xl" :icon="['fa-solid', 'fa-ellipsis']" />
@@ -44,8 +45,8 @@
             <article class="text-xl md:text-2xl  w-full h-[100%] flex flex-col rounded-br-[50px]">
                 <div class="mb-4 md:mb-5 xl:mb-6">
                     <font-awesome-icon icon="fa-solid fa-clock" />
-                    <span class="mx-2 md:mx-4 text-center font-extrabold transition-all duration-300">
-                        Recently Spending
+                    <span class="mx-2 md:mx-3 text-center font-extrabold transition-all duration-300">
+                        Recent Spending
                     </span>
                 </div>
                 <div class="w-full lg:w-full lg:pr-6 overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100 scrollbar-rounded-lg">
@@ -62,13 +63,13 @@
                             isOpen,
                             isEdit
                         }, index) in spendingRecords.filter((item, index) => index <11)" :key="index" class="rounded-[30px] bg-white w-full md:h-[58px] flex flex-wrap md:flex-nowrap mb-[10px]">
-                            <div class="text-xs sm:text-sm text-[#9a9a9a] font-semibold flex items-center h-[calc(100%-30px)] justify-between w-full md:w-[55%] m-[15px] mr-0 mb-0 md:mb-[15px] md:border-r-[1px] border-secondary">
+                            <div class="text-xs sm:text-sm text-[#9a9a9a] font-semibold flex items-center h-[calc(100%-30px)] justify-between w-full md:w-[55%] m-[10px] sm:m-[15px] sm:mr-0 mr-0 mb-0 md:mb-[15px] md:border-r-[1px] border-secondary">
                                 <p class="w-[250px] overflow-hidden truncate">
                                     {{ date }}<br>
                                     {{ item }}
                                 </p>
                                 <font-awesome-icon
-                                    class="text-xl md:text-2xl text-secondary mr-[15px] border-b-[1px] md:border-b-0 border-secondary pb-[8px] sm:pb-[15px] md:pb-0 md:mb-0"
+                                    class="text-base sm:text-lg md:text-xl text-secondary mr-[15px] border-b-[1px] md:border-b-0 border-secondary pb-[8px] sm:pb-[15px] md:pb-0 md:mb-0"
                                     :icon="getIconForCategory(category)" />
                             </div>
                             <div class="text-2xl sm:text-2xl text-secondary font-black flex items-center h-[100%] justify-between w-full md:w-[45%] p-[15px]">
@@ -88,21 +89,21 @@
                 <div class="h-[100%] flex flex-col">
                     <h3 class="flex justify-start">
                         <font-awesome-icon :icon="['fas', 'ranking-star']" />
-                        <span class="mx-2 md:mx-4 font-extrabold transition-all duration-300">
+                        <span class="mx-2 md:mx-3 font-extrabold transition-all duration-300">
                             Category Rating
                         </span>
                     </h3>
                     <div class="relative flex flex-col sm:flex-row sm:items-center" style="flex: 1 1 auto" @mouseleave="resetDataName()">
-                        <v-chart ref="chartsPie" class="py-4" style="width: 100%; height: 300px;" :option="pieOption"/>
-                        <div class="sm:absolute sm:bottom-[5%] pl-[calc(50%-(220px/2)+6px)] sm:pl-0 sm:left-0 w-[30px] flex flex-col pointer-events-none">
+                        <v-chart ref="chartsPie" class="py-4" style="width: 100%; height: 300px;" :option="pieOption" :init-options="{ width: 'auto', height: 'auto' }"/>
+                        <div class="sm:absolute sm:bottom-[5%] pl-[calc(50%-(130px/2)+6px)] sm:pl-0 sm:left-0 w-[30px] flex flex-col pointer-events-none">
                             <div v-for="({ color, name, rate }, index) in categoryPieConsist.overview" :key="index"
                                 class="w-[15px] h-[15px] rounded-full my-2 transition-all duration-300 relative z-[5] group" :style="`background-color: ${color}`" :class="[ dataName === name ? 'my-6 sm:my-4' : 'sm:my-1' ]">
-                                <div class="absolute -top-[13.5px] -left-[8px] z-[4] w-[220px] h-[42px] rounded-full flex items-center justify-between px-2" :class="[ dataName === name ? 'bg-white opacity-100 sm:opacity-80 shadow' : 'sm:bg-transparent sm:opacity-0' ]">
+                                <div class="absolute -top-[13.5px] -left-[8px] z-[4] w-[130px] h-[42px] rounded-full flex items-center justify-between px-2" :class="[ dataName === name ? 'bg-white opacity-100 sm:opacity-80 shadow' : 'sm:bg-transparent sm:opacity-0' ]">
                                     <div class="w-[15px] h-[15px] rounded-full" :style="`background-color: ${color}`" ></div>
-                                    <div class="flex justify-between items-center flex-grow-2 w-[200px] font-bold">
+                                    <div class="flex justify-between items-center flex-grow-2 w-[100px] font-bold">
                                        <div class="flex items-center">
                                             <font-awesome-icon class="text-[#999] text-base md:text-xl w-[20px] pl-2 pr-1" :icon="getIconForCategory(name)" />
-                                            <span class="text-xs">{{ name.charAt(0).toUpperCase() + name.slice(1) }}</span>
+                                            <!-- <span class="text-xs">{{ name.charAt(0).toUpperCase() + name.slice(1) }}</span> -->
                                         </div>
                                         <span class="text-lg font-extrabold text-secondary">{{ rate }}%</span>
                                     </div>
@@ -120,12 +121,12 @@
                 <div class="h-[100%] flex flex-col">
                     <h3>
                         <font-awesome-icon :icon="['fas', 'chart-area']" />
-                        <span class="mx-2 md:mx-4 text-center font-extrabold transition-all duration-300">
+                        <span class="mx-2 md:mx-3 text-center font-extrabold transition-all duration-300">
                             Daily Spending Amount
                         </span>
                     </h3>
                     <div ref="wrapperChartsLine" class="flex items-center" style="flex: 1 1 auto">
-                        <v-chart ref="chartsLine" class="py-4" style="width: 100%; height: 300px;" :width="chartsLineWidth" :option="lineOption" />
+                        <v-chart ref="chartsLine" class="py-4" style="width: 100%; height: 300px;" :width="chartsLineWidth" :option="lineOption" :init-options="{ width: 'auto', height: 'auto' }"/>
                     </div>
                 </div>
             </article>
@@ -261,12 +262,25 @@
             data: [],
             color: [],
             emphasis: {
-                scale: true,
+                scale: true, 
                 itemStyle: {
                     // shadowBlur: 10,
                     // shadowOffsetX: 0,
                     // shadowColor: 'rgba(0, 0, 0, 0.5)',
                 },
+                label: {
+                    show: true,
+                    fontSize: 14,
+                    fontWeight: 'bolder',
+                    textBorderColor: 'transparent',
+                    lineHeight: 20,
+                    formatter: function (params) {
+                        // console.log(params)
+                        const { name, value, color } = params.data;
+                        return `${name.charAt(0).toUpperCase() + name.slice(1)}\n$ ${toCommas(value)}`
+                        
+                    }
+                }
             },
           },
         
@@ -280,13 +294,14 @@
         chartsLineWidth.value = wrapperChartsLine.value.clientWidth;
         
         setTimeout(() => {
-            chartsPie.value.resize ();
-            chartsLine.value.resize ();
+            chartsPie.value && chartsPie.value.resize ();
+            chartsLine.value && chartsLine.value.resize ();
         },10)
     }
 
     onMounted(() => {
         nextTick(() => {
+            deviceWidth.value = window.innerWidth;
             categoryPieConsist.value &&
             categoryPieConsist.value.overview &&
             categoryPieConsist.value.overview
@@ -301,7 +316,6 @@
             
             window.addEventListener('resize', () => {
                 deviceWidth.value = window.innerWidth;
-                deviceWidth.value = window.innerWidth;
                 if (wrapperChartsLine.value && chartsLine.value && chartsPie.value) resizeCharts ();
             })
             
@@ -309,6 +323,10 @@
     })
 
     watch(toggleMenu, (val,oldVal)=>{
+        resizeCharts ();
+    })
+
+    watch(deviceWidth, () => {
         resizeCharts ();
     })
 

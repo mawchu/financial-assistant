@@ -98,12 +98,12 @@
                                             class="mx-2 text-[#999] bg-white w-[70%] px-2 text-xs" type="text" v-model="modifiedRecord[index].memo" @keyup="validInputMsg(index, 'memo')">
                                     </div>
                                 </section>
-                                <div class="w-[50px] relative text-lg z-[1] cursor-pointer">
-                                    <font-awesome-icon v-if="!isEdit" class="mr-4 hover:text-secondary hover:scale-125 " :icon="['fas', 'pen-to-square']"
+                                <div class="w-[50px] absolute right-[20px] top-[50%-14px] text-lg z-[1] cursor-pointer">
+                                    <font-awesome-icon v-if="!isEdit" class="mr-4 hover:text-secondary hover:scale-125 text-[#999] transition-all duration-200" :icon="['fas', 'pen-to-square']"
                                         @click.stop="switchEditState(index)"/>
-                                    <font-awesome-icon v-if="isEdit" class="mr-4 hover:text-secondary hover:scale-125" :icon="['fas', 'clipboard-check']" 
+                                    <font-awesome-icon v-if="isEdit" class="mr-4 hover:text-secondary hover:scale-125  text-[#999] transition-all duration-200" :icon="['fas', 'clipboard-check']" 
                                         @click.stop="editRecord(index, id)"/>
-                                    <font-awesome-icon class="hover:text-secondary hover:scale-125" :icon="['fas', 'trash']" @click="deleteRecord(id)"/>
+                                    <font-awesome-icon class="hover:text-secondary hover:scale-125 text-[#999] transition-all duration-200" :icon="['fas', 'trash']" @click="deleteRecord(id)"/>
                                 </div>
                                 
                             </div>
@@ -239,6 +239,8 @@
     let showModal = ref(false);
     let currentMonth = ref('');
     let amountData = ref(0);
+    const recordsMonthsGap = ref([])
+    let currentGapIndex = ref(0);
     // let sortMap = reactive({
     //     date: 'desc',
     //     createdTime: 'asc',
@@ -252,11 +254,16 @@
     });
 
     function resetSpendingRecords () {
-        console.log('resetSpendingRecords')
+        // console.log('resetSpendingRecords')
         // const { spendingRecords } = storeToRefs(userCenterStore());
         let [list] = recordsMonths.value
             .filter(({ month }) => month === currentMonth.value)
             .map(({ list }) => list);
+
+        currentGapIndex.value = recordsMonths.value.length;
+        recordsMonthsGap.value.push(
+            ...recordsMonths.value.filter((month, index) => index > (currentGapIndex.value - 4))
+        )
 
         list = orderBy(list, ['date'], [isAsc.value ? 'asc' : 'desc']);
 
@@ -402,7 +409,7 @@
    }
    
     function validInputMsg (index, type) {
-        invalidInputMsg.value = validInput (modifiedRecord.value[index], type);
+        invalidInputMsg.value = validInput (modifiedRecord.value[index], type, regexMap);
         modifiedRecord.value[index].valid = loopInvalidInput (index);
     }
 
@@ -421,6 +428,9 @@
         modifiedRecord.value = orderBy(modifiedRecord.value, [type], [order]);
     }
 
+    function toggleMonths () {
+        if(currentGapIndex.value > 0) currentGapIndex.value --;
+    }
 
     watch(isAsc, (val, oldVal) => {
         sortByType(sortType.value, isAsc[sortType.value] ? 'asc' : 'desc');
